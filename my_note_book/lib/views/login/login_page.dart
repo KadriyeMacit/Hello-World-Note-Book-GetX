@@ -64,7 +64,6 @@ class LoginPage extends GetWidget<LoginController> {
         padding: const EdgeInsets.fromLTRB(40, 2, 8, 2),
         child: TextField(
           textInputAction: TextInputAction.next,
-          obscureText: true,
           decoration: InputDecoration(
             border: InputBorder.none,
             hintText: usernameText,
