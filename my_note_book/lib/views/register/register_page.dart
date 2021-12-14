@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_note_book/data/src/colors.dart';
 import 'package:my_note_book/data/src/strings.dart';
+import 'package:my_note_book/views/login/login_page.dart';
 import 'package:my_note_book/views/register/register_controller.dart';
 
 class RegisterPage extends GetWidget<RegisterController> {
@@ -9,6 +10,12 @@ class RegisterPage extends GetWidget<RegisterController> {
 
   @override
   Widget build(BuildContext context) {
+    controller.isRegister.listen((isRegister) {
+      if (isRegister) _goToLogin();
+    });
+
+    controller.error.listen((error) => _errorDialog());
+
     return Scaffold(
         appBar: AppBar(
           title: Text(registerAppBarText),
@@ -151,7 +158,7 @@ class RegisterPage extends GetWidget<RegisterController> {
     return SizedBox(
       height: size,
       child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () => _onTap(),
           child: Text(registerText),
           style: ElevatedButton.styleFrom(
             primary: mainColor,
@@ -159,9 +166,31 @@ class RegisterPage extends GetWidget<RegisterController> {
     );
   }
 
+  void _onTap() {
+    controller.callingRegisterService(
+      controller.usernameController.text,
+      controller.emailController.text,
+      controller.bookController.text,
+      controller.passwordController.text,
+    );
+  }
+
   Widget _buildSpace() {
     return SizedBox(
       height: 30,
+    );
+  }
+
+  void _goToLogin() {
+    Get.toNamed(LoginPage.routeName);
+  }
+
+  void _errorDialog() {
+    Get.snackbar(
+      errorTitle,
+      errorDescription,
+      colorText: white,
+      backgroundColor: red,
     );
   }
 }
