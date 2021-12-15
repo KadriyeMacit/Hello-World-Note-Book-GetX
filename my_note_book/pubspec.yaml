@@ -26,6 +26,9 @@ dependencies:
 
   get: ^4.3.8
   dio: ^4.0.4
+  http: ^0.13.4
+  mocktail: ^0.2.0
+ 
 
 
   # The following adds the Cupertino Icons font to your application.

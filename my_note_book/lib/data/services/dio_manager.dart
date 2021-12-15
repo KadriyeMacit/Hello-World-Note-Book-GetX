@@ -11,12 +11,18 @@ class DioManager {
   DioManager() {
     dio = Dio(
       BaseOptions(
-        baseUrl: _baseUrl,
-      ),
+          baseUrl: _baseUrl,
+          validateStatus: (int? status) {
+            int finalStatus = status ?? -1;
+            return finalStatus >= 200 && finalStatus < 300;
+          },
+          headers: {"Content-Type": "application/json"}),
     );
 
     (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (HttpClient client) {
       client.badCertificateCallback = (X509Certificate cert, String host, int port) => true;
     };
+
+    dio.interceptors;
   }
 }
