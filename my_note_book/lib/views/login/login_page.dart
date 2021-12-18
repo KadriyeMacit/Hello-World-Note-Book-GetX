@@ -109,10 +109,11 @@ class LoginPage extends GetWidget<LoginController> {
       height: size,
       child: ElevatedButton(
           onPressed: () {
-            controller.callingLoginService(
-              controller.usernameController.text,
-              controller.passwordControler.text,
-            );
+            // controller.callingLoginService(
+            //   controller.usernameController.text,
+            //   controller.passwordControler.text,
+            // );
+            _goToHomePage();
           },
           child: Text(loginButton),
           style: ElevatedButton.styleFrom(
@@ -152,7 +153,7 @@ class LoginPage extends GetWidget<LoginController> {
   }
 
   void _goToHomePage() {
-    Get.toNamed(HomePage.routeName);
+    Get.offAndToNamed(HomePage.routeName);
   }
 
   void _errorDialog() {

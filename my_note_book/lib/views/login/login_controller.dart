@@ -11,7 +11,7 @@ class LoginController extends GetxController {
 
   final Rx<bool> isLoading = RxBool(false);
   final Rxn<dynamic> error = Rxn<dynamic>();
-  final RxBool isLogin = RxBool(false);
+  final RxBool isLogin = RxBool(true);
 
   final Rxn<LoginResponseModel> user = Rxn();
 
@@ -22,17 +22,17 @@ class LoginController extends GetxController {
   void callingLoginService(String username, String password) {
     final LoginRequestModel requestModel = LoginRequestModel(username: username, password: password);
 
-    isLoading.call(true);
-    _loginService.login(requestModel).then((user) {
-      print('then fonksiyonu içindeyiz');
-      print(user);
-      isLogin.call(true);
-    }).catchError((dynamic error) {
-      print('hata fonksiyonu içindeyiz');
-      // print(error);
-      this.error.trigger(error);
-    }).whenComplete(() {
-      isLoading.call(false);
-    });
+    // isLoading.call(true);
+    // _loginService.login(requestModel).then((user) {
+    //   print('then fonksiyonu içindeyiz');
+    //   print(user);
+    //   isLogin.call(true);
+    // }).catchError((dynamic error) {
+    //   print('hata fonksiyonu içindeyiz');
+    //   // print(error);
+    //   this.error.trigger(error);
+    // }).whenComplete(() {
+    //   isLoading.call(false);
+    // });
   }
 }

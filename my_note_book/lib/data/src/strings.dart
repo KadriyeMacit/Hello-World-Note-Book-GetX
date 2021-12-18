@@ -16,3 +16,9 @@ const String registerText = 'Kayıt ol';
 //General
 const String errorTitle = 'Hata';
 const String errorDescription = 'Tekrar deneyiniz';
+
+//Home Page
+const String homeAppBarText = 'Anasayfa';
+const String profileText = 'Profil';
+const String infoText = 'Hakkında';
+const String logoutText = 'Çıkış yap';
