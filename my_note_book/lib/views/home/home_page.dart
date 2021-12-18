@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:my_note_book/data/src/colors.dart';
 import 'package:my_note_book/data/src/images.dart';
 import 'package:my_note_book/data/src/strings.dart';
+import 'package:my_note_book/views/add_notes/add_notes_page.dart';
 import 'package:my_note_book/views/home/home_controller.dart';
 import 'package:my_note_book/views/login/login_page.dart';
 
@@ -25,7 +26,7 @@ class HomePage extends GetWidget<HomeController> {
 
   Widget _buildFloatingActionButton() {
     return FloatingActionButton(
-      onPressed: () => _goToBack(),
+      onPressed: () => _goToAddNotePage(),
       child: Icon(Icons.add),
       backgroundColor: mainColor,
     );
@@ -105,5 +106,9 @@ class HomePage extends GetWidget<HomeController> {
 
   void _goToLogout() {
     Get.offAndToNamed(LoginPage.routeName);
+  }
+
+  void _goToAddNotePage() {
+    Get.toNamed(AddNotesPage.routeName);
   }
 }
