@@ -1,10 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:my_note_book/data/src/colors.dart';
 import 'package:my_note_book/data/src/images.dart';
 import 'package:my_note_book/data/src/strings.dart';
+import 'package:my_note_book/views/home/home_page.dart';
 import 'package:my_note_book/views/login/login_controller.dart';
 import 'package:my_note_book/views/register/register_page.dart';
 
@@ -12,6 +12,11 @@ class LoginPage extends GetWidget<LoginController> {
   static const String routeName = '/views/login/login_page';
   @override
   Widget build(BuildContext context) {
+    controller.error.listen((error) => _errorDialog);
+    controller.isLogin.listen((isLogin) {
+      if (isLogin) _goToHomePage();
+    });
+
     return Scaffold(
         appBar: AppBar(
           title: Text(loginAppBarText),
@@ -103,7 +108,12 @@ class LoginPage extends GetWidget<LoginController> {
     return SizedBox(
       height: size,
       child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            controller.callingLoginService(
+              controller.usernameController.text,
+              controller.passwordControler.text,
+            );
+          },
           child: Text(loginButton),
           style: ElevatedButton.styleFrom(
             primary: mainColor,
@@ -139,5 +149,18 @@ class LoginPage extends GetWidget<LoginController> {
                   Get.offNamed(RegisterPage.routeName);
                 }),
         ]));
+  }
+
+  void _goToHomePage() {
+    Get.toNamed(HomePage.routeName);
+  }
+
+  void _errorDialog() {
+    Get.snackbar(
+      errorTitle,
+      errorDescription,
+      colorText: white,
+      backgroundColor: red,
+    );
   }
 }

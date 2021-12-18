@@ -23,6 +23,7 @@ class RegisterServiceImp extends RegisterService {
     //     .then((response) => registerResponseModelFromJson(response.data));
 
     const String _baseUrl = 'http://kadriyemacit.com/notebook/register.php';
+
     var _url = Uri.parse(_baseUrl);
 
     final response = await http.post(_url, body: registerRequestModel.toJson());
