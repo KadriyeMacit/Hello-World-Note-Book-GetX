@@ -1,9 +1,10 @@
 import 'dart:convert';
 
-LoginResponseModel loginResponseModelFromJson(String str) => LoginResponseModel.fromJson(json.decode(str));
+LoginResponseModel loginResponseModelFromJson(String str) =>
+    LoginResponseModel.fromJson(json.decode(str));
 
 class LoginResponseModel {
-  final bool statu;
+  final int statu;
   final String? message;
   final String? userId;
   final String? username;

@@ -29,9 +29,6 @@ class LoginServiceImp extends LoginService {
     final response = await http.post(_url, body: loginRequestModel.toJson());
 
     if (response.statusCode == 200) {
-      print('Giriş işlemi başarıyla gönderildi');
-      print(response.body);
-      print(loginResponseModelFromJson(response.body));
       return loginResponseModelFromJson(response.body);
     } else {
       return '';

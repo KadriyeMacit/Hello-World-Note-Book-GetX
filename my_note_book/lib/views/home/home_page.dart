@@ -105,7 +105,7 @@ class HomePage extends GetWidget<HomeController> {
   }
 
   void _goToLogout() {
-    Get.offAndToNamed(LoginPage.routeName);
+    Get.offNamedUntil(LoginPage.routeName, (route) => false);
   }
 
   void _goToAddNotePage() {

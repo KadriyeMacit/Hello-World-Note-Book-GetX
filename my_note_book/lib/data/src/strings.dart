@@ -16,6 +16,9 @@ const String registerText = 'Kayıt ol';
 //General
 const String errorTitle = 'Hata';
 const String errorDescription = 'Tekrar deneyiniz';
+const String emptyText = 'Boş alan bırakmayınız';
+const String noUserText = 'Kullanıcı bulunamadı';
+const String wrongPasswordText = 'Yanlış parola';
 
 //Home Page
 const String homeAppBarText = 'Anasayfa';

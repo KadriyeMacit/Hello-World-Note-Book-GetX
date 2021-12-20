@@ -16,6 +16,9 @@ class LoginPage extends GetWidget<LoginController> {
     controller.isLogin.listen((isLogin) {
       if (isLogin) _goToHomePage();
     });
+    controller.errorTexts.listen((errorTexts) {
+      if (errorTexts != null) _errorTextsDialog(errorTexts);
+    });
 
     return Scaffold(
         appBar: AppBar(
@@ -109,11 +112,15 @@ class LoginPage extends GetWidget<LoginController> {
       height: size,
       child: ElevatedButton(
           onPressed: () {
-            // controller.callingLoginService(
-            //   controller.usernameController.text,
-            //   controller.passwordControler.text,
-            // );
-            _goToHomePage();
+            if (controller.usernameController.text.isNotEmpty &&
+                controller.passwordControler.text.isNotEmpty) {
+              controller.callingLoginService(
+                controller.usernameController.text,
+                controller.passwordControler.text,
+              );
+            } else {
+              _emptyDialog();
+            }
           },
           child: Text(loginButton),
           style: ElevatedButton.styleFrom(
@@ -160,6 +167,24 @@ class LoginPage extends GetWidget<LoginController> {
     Get.snackbar(
       errorTitle,
       errorDescription,
+      colorText: white,
+      backgroundColor: red,
+    );
+  }
+
+  void _emptyDialog() {
+    Get.snackbar(
+      errorTitle,
+      emptyText,
+      colorText: white,
+      backgroundColor: red,
+    );
+  }
+
+  void _errorTextsDialog(String description) {
+    Get.snackbar(
+      errorTitle,
+      description,
       colorText: white,
       backgroundColor: red,
     );
