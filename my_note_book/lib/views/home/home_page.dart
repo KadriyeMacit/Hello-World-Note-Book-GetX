@@ -5,7 +5,9 @@ import 'package:my_note_book/data/src/images.dart';
 import 'package:my_note_book/data/src/strings.dart';
 import 'package:my_note_book/views/add_notes/add_notes_page.dart';
 import 'package:my_note_book/views/home/home_controller.dart';
+import 'package:my_note_book/views/info/info_page.dart';
 import 'package:my_note_book/views/login/login_page.dart';
+import 'package:my_note_book/views/profile/profile_page.dart';
 
 class HomePage extends GetWidget<HomeController> {
   const HomePage({Key? key}) : super(key: key);
@@ -97,11 +99,11 @@ class HomePage extends GetWidget<HomeController> {
   }
 
   void _goToProfile() {
-    Get.back();
+    Get.toNamed(ProfilePage.routeName);
   }
 
   void _goToInfo() {
-    Get.back();
+    Get.toNamed(InfoPage.routeName);
   }
 
   void _goToLogout() {

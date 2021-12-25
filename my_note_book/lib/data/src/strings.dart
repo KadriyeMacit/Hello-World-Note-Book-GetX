@@ -28,3 +28,9 @@ const String logoutText = 'Çıkış yap';
 
 //Add Notes Page
 const String addNoteAppBarText = 'Not Ekle';
+
+//Info Page
+const String infoAppBarText = 'Hakkımızda';
+
+//Profile Page
+const String profileAppBarText = 'Profil';

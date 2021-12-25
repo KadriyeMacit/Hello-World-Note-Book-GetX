@@ -10,6 +10,7 @@ import 'package:my_note_book/views/register/register_page.dart';
 
 class LoginPage extends GetWidget<LoginController> {
   static const String routeName = '/views/login/login_page';
+
   @override
   Widget build(BuildContext context) {
     controller.error.listen((error) => _errorDialog);
@@ -112,8 +113,7 @@ class LoginPage extends GetWidget<LoginController> {
       height: size,
       child: ElevatedButton(
           onPressed: () {
-            if (controller.usernameController.text.isNotEmpty &&
-                controller.passwordControler.text.isNotEmpty) {
+            if (controller.usernameController.text.isNotEmpty && controller.passwordControler.text.isNotEmpty) {
               controller.callingLoginService(
                 controller.usernameController.text,
                 controller.passwordControler.text,
