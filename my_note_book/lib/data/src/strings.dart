@@ -28,6 +28,11 @@ const String logoutText = 'Çıkış yap';
 
 //Add Notes Page
 const String addNoteAppBarText = 'Not Ekle';
+const String addNoteTitleHintText = 'Başlık yazınız...';
+const String addNoteTitleText = 'Başlık';
+const String addNoteDescriptionHinText = 'Açıklama yazınız...';
+const String addNoteDescriptionText = 'Açıklama';
+const String addNoteSaveButton = 'Kaydet';
 
 //Info Page
 const String infoAppBarText = 'Hakkımızda';

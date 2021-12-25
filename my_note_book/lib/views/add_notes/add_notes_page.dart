@@ -20,12 +20,100 @@ class AddNotesPage extends GetWidget<AddNotesController> {
   }
 
   Widget _buildBody() {
-    return Card(
-      child: _buildTextField(),
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildTitleText(),
+                _buildSpace(),
+                _buildTextFieldTitle(),
+                _buildSpace(),
+                Divider(),
+                _buildSpace(),
+                _buildDescription(),
+                _buildSpace(),
+                _buildTextFieldDescription(),
+              ],
+            ),
+          ),
+          _buildButton(),
+        ],
+      ),
     );
   }
 
-  Widget _buildTextField() {
-    return TextField();
+  Widget _buildSpace() {
+    return SizedBox(
+      height: 20,
+    );
+  }
+
+  Widget _buildTitleText() {
+    return Text(
+      addNoteTitleText,
+      style: TextStyle(
+        fontSize: 16,
+      ),
+    );
+  }
+
+  Widget _buildTextFieldTitle() {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(40, 2, 8, 40),
+        child: TextField(
+          obscureText: true,
+          decoration: InputDecoration(
+            border: InputBorder.none,
+            hintText: addNoteTitleHintText,
+          ),
+          controller: controller.titleController,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDescription() {
+    return Text(
+      addNoteDescriptionText,
+      style: TextStyle(
+        fontSize: 16,
+      ),
+    );
+  }
+
+  Widget _buildTextFieldDescription() {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(40, 2, 8, 70),
+        child: TextField(
+          obscureText: true,
+          decoration: InputDecoration(
+            border: InputBorder.none,
+            hintText: addNoteDescriptionHinText,
+          ),
+          controller: controller.descriptionController,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildButton() {
+    final double size = 40;
+    return SizedBox(
+      height: size,
+      child: ElevatedButton(
+          onPressed: () {},
+          child: Text(addNoteSaveButton),
+          style: ElevatedButton.styleFrom(
+            primary: mainColor,
+          )),
+    );
   }
 }
