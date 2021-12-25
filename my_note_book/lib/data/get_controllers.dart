@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:my_note_book/data/services/add_notes/add_notes_service.dart';
 import 'package:my_note_book/data/services/dio_manager.dart';
 import 'package:my_note_book/data/services/login/login_service.dart';
 import 'package:my_note_book/data/services/register/register_service.dart';
@@ -14,7 +15,7 @@ Future getControllers() async {
   Get.create(() => LoginController(Get.find()), permanent: false);
   Get.create(() => RegisterController(Get.find()), permanent: false);
   Get.create(() => HomeController(), permanent: false);
-  Get.create(() => AddNotesController(), permanent: false);
+  Get.create(() => AddNotesController(Get.find()), permanent: false);
   Get.create(() => InfoController(), permanent: false);
   Get.create(() => ProfileController(), permanent: false);
 
@@ -23,4 +24,5 @@ Future getControllers() async {
 
   Get.lazyPut<RegisterService>(() => RegisterServiceImp(Get.find()));
   Get.lazyPut<LoginService>(() => LoginServiceImp(Get.find()));
+  Get.lazyPut<AddNotesService>(() => AddNotesServiceImp(Get.find()));
 }

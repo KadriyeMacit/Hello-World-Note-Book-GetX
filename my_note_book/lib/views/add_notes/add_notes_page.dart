@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:my_note_book/data/src/colors.dart';
 import 'package:my_note_book/data/src/strings.dart';
 import 'package:my_note_book/views/add_notes/add_notes_controller.dart';
+import 'package:my_note_book/views/home/home_page.dart';
 
 class AddNotesPage extends GetWidget<AddNotesController> {
   const AddNotesPage({Key? key}) : super(key: key);
@@ -11,6 +12,10 @@ class AddNotesPage extends GetWidget<AddNotesController> {
 
   @override
   Widget build(BuildContext context) {
+    controller.isSave.listen((isSave) {
+      isSave ? _goToHome() : _empty();
+    });
+    controller.error.listen((error) => _errorDialog());
     return Scaffold(
         appBar: AppBar(
           title: Text(addNoteAppBarText),
@@ -22,12 +27,14 @@ class AddNotesPage extends GetWidget<AddNotesController> {
   Widget _buildBody() {
     return Padding(
       padding: const EdgeInsets.all(20.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          SingleChildScrollView(
-            child: Column(
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Column(
+              mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _buildTitleText(),
@@ -41,9 +48,10 @@ class AddNotesPage extends GetWidget<AddNotesController> {
                 _buildTextFieldDescription(),
               ],
             ),
-          ),
-          _buildButton(),
-        ],
+            _buildSpace(),
+            _buildButton(),
+          ],
+        ),
       ),
     );
   }
@@ -68,7 +76,6 @@ class AddNotesPage extends GetWidget<AddNotesController> {
       child: Padding(
         padding: const EdgeInsets.fromLTRB(40, 2, 8, 40),
         child: TextField(
-          obscureText: true,
           decoration: InputDecoration(
             border: InputBorder.none,
             hintText: addNoteTitleHintText,
@@ -93,7 +100,6 @@ class AddNotesPage extends GetWidget<AddNotesController> {
       child: Padding(
         padding: const EdgeInsets.fromLTRB(40, 2, 8, 70),
         child: TextField(
-          obscureText: true,
           decoration: InputDecoration(
             border: InputBorder.none,
             hintText: addNoteDescriptionHinText,
@@ -109,11 +115,47 @@ class AddNotesPage extends GetWidget<AddNotesController> {
     return SizedBox(
       height: size,
       child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () => _onTap(),
           child: Text(addNoteSaveButton),
           style: ElevatedButton.styleFrom(
             primary: mainColor,
           )),
     );
   }
+
+  void _onTap() {
+    if (controller.titleController.text.isNotEmpty || controller.descriptionController.text.isNotEmpty) {
+      controller.callingAddNotesService(
+        controller.titleController.text,
+        controller.descriptionController.text,
+      );
+    } else {
+      _emptyDialog();
+    }
+  }
+
+  void _emptyDialog() {
+    Get.snackbar(
+      errorTitle,
+      emptyText,
+      colorText: white,
+      backgroundColor: red,
+    );
+  }
+
+  void _errorDialog() {
+    Get.snackbar(
+      errorTitle,
+      errorDescription,
+      colorText: white,
+      backgroundColor: red,
+    );
+  }
+
+  void _goToHome() {
+    print('home');
+    Get.toNamed(HomePage.routeName);
+  }
+
+  void _empty() {}
 }
