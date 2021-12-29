@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:my_note_book/data/services/add_notes/add_notes_service.dart';
-import 'package:my_note_book/data/services/dio_manager.dart';
 import 'package:my_note_book/data/services/home/home_service.dart';
 import 'package:my_note_book/data/services/login/login_service.dart';
 import 'package:my_note_book/data/services/register/register_service.dart';
@@ -21,8 +20,6 @@ Future getControllers() async {
   Get.create(() => ProfileController(), permanent: false);
 
   //Services
-  Get.lazyPut(() => DioManager(), fenix: true);
-
   Get.lazyPut<RegisterService>(() => RegisterServiceImp());
   Get.lazyPut<LoginService>(() => LoginServiceImp());
   Get.lazyPut<AddNotesService>(() => AddNotesServiceImp());
