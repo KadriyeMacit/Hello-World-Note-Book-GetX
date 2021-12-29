@@ -16,6 +16,8 @@ class HomePage extends GetWidget<HomeController> {
 
   @override
   Widget build(BuildContext context) {
+    controller.error.listen((error) => _errorDialog());
+
     return Scaffold(
         appBar: AppBar(
           title: Text(homeAppBarText),
@@ -35,21 +37,64 @@ class HomePage extends GetWidget<HomeController> {
   }
 
   Widget _buildBody() {
-    return ListView.builder(
-      itemBuilder: (_, index) => Padding(
-        padding: const EdgeInsets.all(5.0),
-        child: _buildCard(index),
+    return Obx(
+      () => ListView.builder(
+        itemBuilder: (_, index) => Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: _buildCard(
+            controller.notesTitle.value?[index] ?? "",
+            controller.notesDescription.value?[index] ?? "",
+            controller.notesDate.value?[index].toString() ?? "",
+          ),
+        ),
+        itemCount: controller.notesTitle.value?.length ?? 0,
       ),
-      itemCount: 5,
     );
   }
 
-  Widget _buildCard(int index) {
+  Widget _buildCard(
+    String title,
+    String description,
+    String date,
+  ) {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Text('Not $index'),
-      ),
+      child: Padding(padding: const EdgeInsets.all(20.0), child: _buildCardColumn(title, description, date)),
+    );
+  }
+
+  Widget _buildCardColumn(
+    String title,
+    String description,
+    String date,
+  ) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        Divider(),
+        _buildSpace(),
+        Text(
+          description,
+        ),
+        _buildSpace(),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Text(
+              date,
+            ),
+          ],
+        )
+      ],
+    );
+  }
+
+  Widget _buildSpace() {
+    return SizedBox(
+      height: 10,
     );
   }
 
@@ -112,5 +157,14 @@ class HomePage extends GetWidget<HomeController> {
 
   void _goToAddNotePage() {
     Get.toNamed(AddNotesPage.routeName);
+  }
+
+  void _errorDialog() {
+    Get.snackbar(
+      errorTitle,
+      errorDescription,
+      colorText: white,
+      backgroundColor: red,
+    );
   }
 }
