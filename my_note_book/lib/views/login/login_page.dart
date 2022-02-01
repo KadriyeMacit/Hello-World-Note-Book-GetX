@@ -113,7 +113,8 @@ class LoginPage extends GetWidget<LoginController> {
       height: size,
       child: ElevatedButton(
           onPressed: () {
-            if (controller.usernameController.text.isNotEmpty && controller.passwordControler.text.isNotEmpty) {
+            if (controller.usernameController.text.isNotEmpty &&
+                controller.passwordControler.text.isNotEmpty) {
               controller.callingLoginService(
                 controller.usernameController.text,
                 controller.passwordControler.text,
@@ -154,7 +155,7 @@ class LoginPage extends GetWidget<LoginController> {
               style: TextStyle(color: black, fontStyle: FontStyle.italic),
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
-                  Get.offNamed(RegisterPage.routeName);
+                  Get.toNamed(RegisterPage.routeName);
                 }),
         ]));
   }

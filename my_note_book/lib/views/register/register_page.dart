@@ -167,12 +167,19 @@ class RegisterPage extends GetWidget<RegisterController> {
   }
 
   void _onTap() {
-    controller.callingRegisterService(
-      controller.usernameController.text,
-      controller.emailController.text,
-      controller.bookController.text,
-      controller.passwordController.text,
-    );
+    if (controller.usernameController.text.isNotEmpty &&
+        controller.emailController.text.isNotEmpty &&
+        controller.bookController.text.isNotEmpty &&
+        controller.passwordController.text.isNotEmpty) {
+      controller.callingRegisterService(
+        controller.usernameController.text,
+        controller.emailController.text,
+        controller.bookController.text,
+        controller.passwordController.text,
+      );
+    } else {
+      _emptyDialog();
+    }
   }
 
   Widget _buildSpace() {
@@ -189,6 +196,15 @@ class RegisterPage extends GetWidget<RegisterController> {
     Get.snackbar(
       errorTitle,
       errorDescription,
+      colorText: white,
+      backgroundColor: red,
+    );
+  }
+
+  void _emptyDialog() {
+    Get.snackbar(
+      errorTitle,
+      emptyText,
       colorText: white,
       backgroundColor: red,
     );
