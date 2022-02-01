@@ -8,6 +8,7 @@ import 'package:my_note_book/views/home/home_controller.dart';
 import 'package:my_note_book/views/info/info_page.dart';
 import 'package:my_note_book/views/login/login_page.dart';
 import 'package:my_note_book/views/profile/profile_page.dart';
+import 'package:my_note_book/views/search/search_page.dart';
 
 class HomePage extends GetWidget<HomeController> {
   const HomePage({Key? key}) : super(key: key);
@@ -110,6 +111,8 @@ class HomePage extends GetWidget<HomeController> {
           Divider(),
           _buildTitle(infoText, Icons.info, _goToInfo),
           Divider(),
+          _buildTitle(searchAppBarText, Icons.search, _goToSearchPage),
+          Divider(),
           _buildTitle(logoutText, Icons.logout, _goToLogout),
         ],
       ),
@@ -157,6 +160,10 @@ class HomePage extends GetWidget<HomeController> {
 
   void _goToAddNotePage() {
     Get.toNamed(AddNotesPage.routeName);
+  }
+
+  void _goToSearchPage() {
+    Get.toNamed(SearchPage.routeName);
   }
 
   void _errorDialog() {
