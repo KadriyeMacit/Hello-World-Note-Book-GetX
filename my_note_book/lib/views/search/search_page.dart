@@ -14,7 +14,6 @@ class SearchPage extends GetWidget<SearchController> {
     controller.error.listen((error) => _errorDialog());
 
     return Scaffold(
-      backgroundColor: Colors.grey,
       appBar: AppBar(
         title: Text(searchAppBarText),
         backgroundColor: mainColor,
@@ -30,6 +29,7 @@ class SearchPage extends GetWidget<SearchController> {
           child: ListView(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             children: [
+              _buildSpace(),
               _buildSearchName(),
               SizedBox(height: 30),
               _buildNoItemCard(),
@@ -93,13 +93,16 @@ class SearchPage extends GetWidget<SearchController> {
 
   Widget _buildNoItemTitle() {
     return Text(
-      '',
+      'Üzgünümm',
+      style: TextStyle(
+        fontWeight: FontWeight.bold,
+      ),
     );
   }
 
   Widget _buildNoItemDescription() {
     return Text(
-      '',
+      'Aradığın not yok',
     );
   }
 
@@ -114,10 +117,22 @@ class SearchPage extends GetWidget<SearchController> {
   }
 
   Widget _buildSearchName() {
-    return _buildSearchNameTextField(
-      controller.namesTextController,
-      // _nameFocusNode,
-      '',
+    return Material(
+      elevation: 10,
+      color: white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(10),
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.only(left: 10),
+        child: _buildSearchNameTextField(
+          controller.namesTextController,
+          // _nameFocusNode,
+          'Not ara...',
+        ),
+      ),
     );
   }
 
@@ -131,16 +146,11 @@ class SearchPage extends GetWidget<SearchController> {
       textInputAction: TextInputAction.next,
       controller: textFieldValidatorController,
       decoration: InputDecoration(
+        border: InputBorder.none,
         hintText: hintText,
         //  false,
         suffixIcon: IconButton(
-          // icon: SvgPicture.asset(
-          //   Img.icSearch,
-          //   height: 26,
-          //   width: 26,
-
-          // ),
-          icon: Icon(Icons.ac_unit),
+          icon: Icon(Icons.search),
           onPressed: () {
             //  _nameFocusNode.unfocus();
             controller.search(controller.namesTextController.text);
@@ -198,7 +208,7 @@ class SearchPage extends GetWidget<SearchController> {
     return AnimatedContainer(
       width: Get.width,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Colors.brown.shade100,
         borderRadius: const BorderRadius.all(Radius.circular(10)),
       ),
       duration: const Duration(milliseconds: _animationDuration),
