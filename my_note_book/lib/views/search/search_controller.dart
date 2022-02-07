@@ -72,11 +72,7 @@ class SearchController extends GetxController {
   void onNamesSelected(int id) {
     selectedIndex.call(id);
 
-    final String parsedId = Uri.encodeFull(
-      noteNameList[id].title.toString(),
-    );
-
-    _loadNames(parsedSearchedString, container: parsedId);
+    _loadNames(parsedSearchedString);
 
     // Get.back();
   }

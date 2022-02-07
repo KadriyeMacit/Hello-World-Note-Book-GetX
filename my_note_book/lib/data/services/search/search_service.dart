@@ -15,12 +15,6 @@ class SearchServiceImp extends SearchService {
 
     final response = await http.post(_url, body: searchRequestModel.toJson());
 
-    // if (response.statusCode == 200) {
-    //   return SearchResponseModelFromJson(response.body);
-    // } else {
-    //   return '';
-    // }
-
     var noteListTitle = [];
 
     if (response.statusCode == 200) {
