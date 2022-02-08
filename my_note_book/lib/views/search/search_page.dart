@@ -11,8 +11,6 @@ class SearchPage extends GetWidget<SearchController> {
 
   @override
   Widget build(BuildContext context) {
-    controller.error.listen((error) => _errorDialog());
-
     return Scaffold(
       appBar: AppBar(
         title: Text(searchAppBarText),
@@ -47,17 +45,8 @@ class SearchPage extends GetWidget<SearchController> {
     );
   }
 
-  void _errorDialog() {
-    Get.snackbar(
-      errorTitle,
-      errorDescription,
-      colorText: white,
-      backgroundColor: red,
-    );
-  }
-
   Widget _buildNoItemCard() {
-    return Obx(() => controller.isNoResultFound.value && controller.isnoteNameNotEmpty.value
+    return Obx(() => controller.isNoResultFound.value && !controller.isnoteNameNotEmpty.value
         ? Container(
             decoration: BoxDecoration(
               color: Colors.white,
