@@ -120,4 +120,42 @@ class Note{
 	    }
 	}
     
+
+    function userNotesControl()
+	{
+	    $query = "SELECT * FROM $this->table_name 
+	              WHERE 
+	              USER_ID = '$this->userId'";
+	              
+	              
+	    $response = mysqli_query($this->conn, $query);
+	    
+	    if((mysqli_num_rows($response) > 0))
+	    {
+	       while($row = $response->fetch_array())
+            {
+                $noteList = array(
+                    "noteId" => $row["NOTE_ID"],
+                    "title" => $row["TITLE"],
+                    "description" => $row["DESCRIPTION"],
+                    "date" => $row["DATE"],
+                    "isRemove" => $row["IS_REMOVE"],
+                    "userId" => $row["USER_ID"]
+                    );
+                    
+                    
+                    $notesLists[] = $noteList;
+                    
+                    $noteResponse = array("notes" => $notesLists);
+                    
+            }
+            
+            print_r(json_encode($noteResponse));
+	    
+	    }
+	    else
+	    {
+	        return null;  // Not yok
+	    }
+	}
 }
