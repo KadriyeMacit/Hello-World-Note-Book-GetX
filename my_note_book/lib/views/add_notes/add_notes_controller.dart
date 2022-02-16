@@ -4,6 +4,7 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:my_note_book/data/services/add_notes/add_notes_service.dart';
 import 'package:my_note_book/data/services/add_notes/model/add_notes_request_model.dart';
 import 'package:my_note_book/data/services/add_notes/model/add_notes_response_model.dart';
+import 'package:my_note_book/views/common/common_values.dart';
 
 class AddNotesController extends GetxController {
   final TextEditingController titleController = TextEditingController();
@@ -24,6 +25,7 @@ class AddNotesController extends GetxController {
       title: title,
       description: description,
       isRemove: '0',
+      userId: userId.value,
     );
 
     isLoading.call(true);
@@ -33,6 +35,7 @@ class AddNotesController extends GetxController {
       },
     ).catchError((dynamic error) {
       this.error.trigger(error);
+      print(error);
     }).whenComplete(
       () {
         isLoading.call(false);

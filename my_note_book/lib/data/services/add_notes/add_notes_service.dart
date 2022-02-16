@@ -16,7 +16,6 @@ class AddNotesServiceImp extends AddNotesService {
     final response = await http.post(_url, body: addNotesRequestModel.toJson());
 
     if (response.statusCode == 200) {
-      print('Not ekleme başarılı');
       return addNotesResponseModelFromJson(response.body);
     } else {
       return '';
